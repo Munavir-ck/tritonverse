@@ -1,0 +1,22 @@
+.card {
+    width: 350px;
+    padding: 10px;
+    border-radius: 20px;
+    background: #fff;
+    border: none;
+    height: 350px;
+    position: relative;
+  }
+  
+  .container {
+    height: 100vh;
+  }
+  
+  body {
+    background: #eee;
+  }
+  
+  .mobile-text {
+    color: #989696b8;
+    font-size: 15px;
+  }

@@ -1,0 +1,252 @@
+<%- include("partials/adminHeader.ejs") -%>
+  <div class="container tm-mt-big tm-mb-big">
+    <div class="row">
+      <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
+        <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+          <div class="row">
+            <div class="col-12">
+              <h2 class="tm-block-title d-inline-block">Add Product</h2>
+            </div>
+          </div>
+          <div class="row tm-edit-product-row">
+            <div id="alert"></div>
+            <div class="col-xl-6 col-lg-6 col-md-12">
+              <form action="/admin/postAddProduct" class="tm-edit-product-form" method="post"
+                enctype="multipart/form-data">
+                <div class="form-group mb-3">
+                  <label for="name">Product Name
+                  </label>
+                  <input id="name" name="name" type="text" class="form-control validate" required />
+                </div>
+                <div class="form-group mb-3">
+                  <label for="name">Price
+                  </label>
+                  <input id="name" name="price" type="text" class="form-control validate" required />
+                </div>
+                <div class="form-group mb-3">
+                  <label for="description">Description</label>
+                  <textarea class="form-control validate" rows="3" name="description" required></textarea>
+                </div>
+                <div class="form-group mb-3">
+                  <label for="category">Category</label>
+                  <select class="custom-select tm-select-accounts" id="category" name="category">
+                    <option selected>Select category</option>
+                    <% for( let i=0; i < categoryList.length; i++ ) { %>
+
+
+                      <option value="<%=categoryList[i]._id %>"> <%-categoryList[i].name%> </option>
+
+                      <% } %>
+
+
+                  </select>
+                </div>
+                <div class="row">
+                  <div class="form-group mb-3 col-xs-12 col-sm-6">
+                    <label for="expire_date"> Brand
+                    </label>
+                    <input id="expire_date" name="brand" type="text" class="form-control validate"
+                      data-large-mode="true" />
+                  </div>
+                  <div class="form-group mb-3 col-xs-12 col-sm-6">
+                    <label for="stock">Quantity
+                    </label>
+                    <input id="stock" name="Quantity" type="text" class="form-control validate" required />
+                  </div>
+                </div>
+
+            </div>
+            <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4" style="padding-top: 35px;">
+
+              <div class="custom-file mt-3 mb-3">addimage
+               
+               
+                  <img src=" "  id="imgView"  class="mb-3" width="100px" height="auto" alt="">
+                
+                  <input class="btn btn-primary btn-block mx-auto" id="id_image"  type="file" name="image" onchange="viewImage(event)" multiple/>
+        
+                  <div id="image-box" class="image-container h-50 w-50"></div>
+                  <button
+                    class="btn btn-outline-info"
+                    id="crop-btn0"
+                    style="width: 100%; margin-top: 10px; display: none; background-color: #0090e7;
+                    color: white;"
+                    type="button"
+                  >
+                    Crop
+                  </button>
+
+
+
+
+              </div>
+              
+              <div  class="custom-file mt-3 mb-3">addimage
+                <img src=" "  id="imgView"   class="mb-3 " width="100px" height="auto" alt="">
+                <!-- <input id="fileInput" type="file" style="display:none;" name="image" />
+                <input type="button" class="btn btn-primary btn-block mx-auto" value="UPLOAD PRODUCT IMAGE"
+                  onclick="document.getElementById('fileInput').click();"/> -->
+                  <input class="btn btn-primary btn-block mx-auto"  type="file"   onchange="viewImage(event)" name="image" multiple/>
+                  <div id="image-box1" class="image-container h-50 w-50"></div>
+          <button
+            class="btn btn-outline-info"
+            id="crop-btn1"
+            style="width: 100%; margin-top: 10px; display: none; background-color: #0090e7;
+            color: white;"
+            type="button"
+          >
+            Crop
+          </button>
+
+
+              </div>
+              
+              <div class="custom-file mt-3 mb-3">addimage
+                <img src=" " id="imgView"  class="mb-3" width="100px" height="auto" alt="">
+                <!-- <input id="fileInput" type="file" style="display:none;" name="image" />
+                <input type="button" class="btn btn-primary btn-block mx-auto" value="UPLOAD PRODUCT IMAGE"
+                  onclick="document.getElementById('fileInput').click();"/> -->
+                  <input  class="btn btn-primary btn-block mx-auto" type="file"   onchange="viewImage(event)" name="image" multiple>
+                  <div id="image-box2" class="image-container h-50 w-50"></div>
+          <button
+            class="btn btn-outline-info"
+            id="crop-btn2"
+            style="width: 100%; margin-top: 10px; display: none; background-color: #0090e7;
+            color: white;"
+            type="button"
+          >
+            Crop
+          </button>
+
+
+              </div>
+              <!-- <div class="custom-file mt-3 mb-3">
+                 <input id="fileInput" type="file" style="display:none;" name="image" /> -->
+                <!-- <input type="button" class="btn btn-primary btn-block mx-auto" value="UPLOAD PRODUCT IMAGE"
+                  onclick="document.getElementById('fileInput').click();" />
+
+
+              </div>
+              <div class="custom-file mt-3 mb-3">
+                <input id="fileInput" type="file" style="display:none;" name="image" />
+                <input type="button" class="btn btn-primary btn-block mx-auto" value="UPLOAD PRODUCT IMAGE"
+                  onclick="document.getElementById('fileInput').click();" /> -->
+
+
+              <!-- </div> --> -->
+              <br>
+              <div class="form-group mb-3 col-xs-12 col-sm-6" style="margin-top: 14px;">
+                <label for="stock">Discount
+                </label>
+                <input id="stock" name="Discount" type="text" class="form-control validate" />
+              </div>
+            </div>
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary btn-block text-uppercase" id="" onclick="validation()">Add Product Now</button>
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.11/cropper.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.11/cropper.js" defer></script>
+  <script>
+
+    function viewImage(e){
+      console.log(1111111111111111);
+              document.getElementById("imgView").src = URL.createObjectURL(e.target.files[0])
+           
+              
+            }
+         
+        function validation(){
+          console.log(1111111111111111111);
+          document.getElementById("alert").innerHTML='Not valid'
+        const file = this.files[0];
+const  fileType = file['type'];
+const validImageTypes = ['image/gif', 'image/jpeg', 'image/png'];
+if (!validImageTypes.includes(fileType)) {
+   document.getElementById('alert').innerHTML='Not valid'}
+   console.log(1111111111111111111);
+}  
+
+
+
+
+
+
+    
+  
+  // image-box is the id of the div element that will store our cropping image preview
+  const imagebox = document.getElementById("image-box");
+// crop-btn is the id of button that will trigger the event of change original file with cropped file.
+const crop_btn = document.getElementById("crop-btn");
+// id_image is the id of the input tag where we will upload the image
+const input = document.getElementById("id_image");
+
+// When user uploads the image this event will get triggered
+input.addEventListener("change", () => {
+  // Getting image file object from the input variable
+  const img_data = input.files[0];
+  // createObjectURL() static method creates a DOMString containing a URL representing the object given in the parameter.
+  // The new object URL represents the specified File object or Blob object.
+  const url = URL.createObjectURL(img_data);
+
+  // Creating a image tag inside imagebox which will hold the cropping view image(uploaded file) to it using the url created before.
+  imagebox.innerHTML = `<img src="${url}" id="image" style="width:70%;">`;
+
+  // Storing that cropping view image in a variable
+  const image = document.getElementById("image");
+
+  // Displaying the image box
+  document.getElementById("image-box").style.display = "block";
+  // Displaying the Crop buttton
+  document.getElementById("crop-btn").style.display = "block";
+  // Hiding the Post button
+  document.getElementById("confirm-btn").style.display = "none";
+
+  // Creating a croper object with the cropping view image
+  // The new Cropper() method will do all the magic and diplay the cropping view and adding cropping functionality on the website
+  // For more settings, check out their official documentation at https://github.com/fengyuanchen/cropperjs
+  const cropper = new Cropper(image, {
+    autoCropArea: 1,
+    viewMode: 1,
+    scalable: false,
+    zoomable: false,
+    movable: false,
+    minCropBoxWidth: 200,
+    minCropBoxHeight: 200,
+  });
+
+  // When crop button is clicked this event will get triggered
+  crop_btn.addEventListener("click", () => {
+    // This method coverts the selected cropped image on the cropper canvas into a blob object
+    cropper.getCroppedCanvas().toBlob((blob) => {
+      // Gets the original image data
+      let fileInputElement = document.getElementById("id_image");
+      // Make a new cropped image file using that blob object, image_data.name will make the new file name same as original image
+      let file = new File([blob], img_data.name, {
+        type: "image/",
+        lastModified: new Date().getTime(),
+      });
+      // Create a new container
+      let container = new DataTransfer();
+      // Add the cropped image file to the container
+      container.items.add(file);
+      // Replace the original image file with the new cropped image file
+      fileInputElement.files = container.files;
+
+      // Hide the cropper box
+      document.getElementById("image-box").style.display = "none";
+      // Hide the crop button
+      document.getElementById("crop-btn").style.display = "none";
+      // Display the Post button
+      document.getElementById("confirm-btn").style.display = "block";
+    });
+  });
+});
+
+</script>
+    </script> -->

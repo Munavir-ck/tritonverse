@@ -1,0 +1,157 @@
+<%- include("partials/adminHeader.ejs") -%>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <p class="text-white mt-5 mb-5">Welcome back, <b>Admin</b></p>
+            </div>
+        </div>
+        <!-- row -->
+        <div class="row tm-content-row">
+            <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
+                <div class="tm-bg-primary-dark tm-block">
+                    <h2 class="tm-block-title">Monthly Turnover</h2>
+                    <canvas id="lineChart"></canvas>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
+                <div class="tm-bg-primary-dark tm-block">
+                    <h2 class="tm-block-title">Yearly Turnover</h2>
+                    <canvas id="barChart"></canvas>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
+                <div class="tm-bg-primary-dark tm-block tm-block-taller">
+                    <h2 class="tm-block-title">Storage Information</h2>
+                    <div id="pieChartContainer">
+                        <canvas id="pieChart" class="chartjs-render-monitor" width="200" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 tm-block-col">
+                <div class="tm-bg-primary-dark tm-block tm-block-taller tm-block-overflow">
+                    <p>
+                        
+                        <button class="btn btn-primary" style="margin-left: 18px;" type="button"  onclick="dayRevenue()" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2">Today Revenue</button>
+                        <button class="btn btn-primary" type="button"  onclick="dayRevenue()" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Today Order</button>
+                      </p>
+                      <div class="row">
+                        <div class="col">
+                          <div class="collapse multi-collapse" id="multiCollapseExample1">
+                            <div class="card card-body">
+                            <h6>Today Revenue</h6><h2 id="revenue" style="font-weight: 900;"> </h2>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="collapse multi-collapse" id="multiCollapseExample2">
+                            <div class="card card-body">
+                             <h6>Today Orders</h6><h2 id="count" style="font-weight: 900;"></h2>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    <!-- <button class="btn btn-primary" type="button" onclick=" dayRevenue()"></button> -->
+                    
+                    <!-- <div class="tm-notification-items">
+                       
+                       
+                        
+                     
+                       
+                        
+                        <div class="media tm-notification-item"> -->
+                            <!-- <div class="tm-gray-circle"><img src="img/notification-01.jpg" alt="Avatar Image"
+                                    class="rounded-circle"></div>
+                            <div class="media-body">
+                                <p class="mb-2"><b>Lily A</b> and <b>6 others</b> sent you <a href="#"
+                                        class="tm-notification-link">product updates</a>.</p>
+                                <span class="tm-small tm-text-color-secondary">6h ago.</span>
+                            </div> -->
+                        <!-- </div>
+                      
+                    
+                    </div> -->
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <footer class="tm-footer row tm-mt-small">
+        <div class="col-12 font-weight-light">
+            <p class="text-center text-white mb-0 px-4 small">
+                Copyright &copy; <b>2018</b> All rights reserved.
+
+                Design: <a rel="nofollow noopener" href="https://templatemo.com" class="tm-footer-link">Template Mo</a>
+            </p>
+        </div>
+    </footer>
+    </div>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <!-- https://jquery.com/download/ -->
+    <script src="js/moment.min.js"></script>
+    <!-- https://momentjs.com/ -->
+    <script src="js/Chart.min.js"></script>
+    <!-- http://www.chartjs.org/docs/latest/ -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- https://getbootstrap.com/ -->
+    <script src="js/tooplate-scripts.js"></script>
+    <script>
+
+
+
+        Chart.defaults.global.defaultFontColor = 'white';
+        let ctxLine,
+            ctxBar,
+            ctxPie,
+            optionsLine,
+            optionsBar,
+            optionsPie,
+            configLine,
+            configBar,
+            configPie,
+            lineChart;
+        barChart, pieChart;
+        // DOM is ready
+        $(function () {
+            drawLineChart(); // Line Chart
+            drawBarChart(); // Bar Chart
+            drawPieChart(); // Pie Chart
+          
+            $(window).resize(function () {
+                updateLineChart();
+                updateBarChart();
+                
+            });
+        })
+    </script>
+    <script>
+       
+
+   
+
+
+
+
+
+    </script>
+  <script>
+    function dayRevenue(){
+        console.log(11111222222344444444444444);
+        $.ajax({
+            url:"/admin/dailyChart",
+            method:"get",
+            success:((res)=>{
+              if(res.status){
+                console.log(6666666666666666666);
+              document.getElementById("revenue").innerHTML="₹"+res.totalAmount
+              document.getElementById("count").innerHTML=res.totalOrder
+              }
+            })
+        })
+    }
+  </script>
+        
+    </body>
+    <%- include('partials/adminFooter.ejs') -%>

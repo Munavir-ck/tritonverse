@@ -1,0 +1,57 @@
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css">
+</head>
+
+<div class="h-screen bg-blue-500 py-20 px-3" style="background-color: black;">
+    <div class="container mx-auto">
+        <div class="max-w-sm mx-auto md:max-w-lg">
+            <form action="/otpVerify" method="post">
+                <div class="w-full">
+                    <div class="bg-white h-64 py-3 rounded text-center">
+                        <h1 class="text-2xl font-bold">OTP Verification</h1>
+                        <%=message%>
+                        <div class="flex flex-col mt-4">
+                            <span>Enter the OTP you received at</span>
+                            <span class="font-bold"><%=phone%></span>
+                        </div>
+
+                        <div id="otp" class="flex flex-row justify-center text-center px-2 mt-5">
+                            <input class="m-2 border h-10 w-10 text-center form-control rounded" type="text" id="first"
+                                name="name" maxlength="1">
+                            <input class="m-2 border h-10 w-10 text-center form-control rounded" type="text" id="second"
+                                name="name" maxlength="1">
+                            <input class="m-2 border h-10 w-10 text-center form-control rounded" type="text" id="third"
+                                name="name" maxlength="1">
+                            <input class="m-2 border h-10 w-10 text-center form-control rounded" type="text" id="fourth"
+                                name="name" maxlength="1">
+                            <input class="m-2 border h-10 w-10 text-center form-control rounded" type="text" id="fifth"
+                                name="name" maxlength="1">
+                            <input class="m-2 border h-10 w-10 text-center form-control rounded" type="text" id="sixth"
+                                name="name" maxlength="1">
+                        </div>
+
+                       
+                            <button type="submit" class="btn btn-success">OK</button>
+                       
+
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+
+        function OTPInput() {
+            const inputs = document.querySelectorAll('#otp > *[id]');
+            for (let i = 0; i < inputs.length; i++) { inputs[i].addEventListener('keydown', function (event) { if (event.key === "Backspace") { inputs[i].value = ''; if (i !== 0) inputs[i - 1].focus(); } else { if (i === inputs.length - 1 && inputs[i].value !== '') { return true; } else if (event.keyCode > 47 && event.keyCode < 58) { inputs[i].value = event.key; if (i !== inputs.length - 1) inputs[i + 1].focus(); event.preventDefault(); } else if (event.keyCode > 64 && event.keyCode < 91) { inputs[i].value = String.fromCharCode(event.keyCode); if (i !== inputs.length - 1) inputs[i + 1].focus(); event.preventDefault(); } } }); }
+        } OTPInput();
+    });
+</script>

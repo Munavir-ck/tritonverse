@@ -1,0 +1,544 @@
+<%- include("partials/userHeader.ejs")-%>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <section style="background-color: #eee;">
+    <div class="container py-5">
+
+
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="card mb-4">
+            <div class="card-body text-center">
+              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                class="rounded-circle img-fluid" style="width: 150px;">
+              <h5 class="my-3">
+                <%=UserInfo.name%>
+              </h5>
+              <p class="text-muted mb-1">
+                <%=UserInfo.email%>
+              </p>
+              <button type="button"  class="btn btn-light" data-toggle="modal" data-target="#exampleModalCenter">
+               EDIT
+              </button>
+            
+              <!-- <p class="text-muted mb-4">Bay Area, San Francisco, CA</p> -->
+
+            </div>
+          </div>
+          <div class="card mb-4 mb-lg-0">
+            <div class="card-body p-0">
+              <ul class="list-group list-group-flush rounded-3">
+               
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                  <i class="fab fa-github fa-lg" style="color: #333333;"></i>
+                  <button id="manager" onclick="addressMange()">
+                    <p class="mb-0">Manage Addresser</p>
+                  </button>
+                </li>
+                </a>
+                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                  <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
+                  <!-- <p class="mb-0">My Wishlist</p> -->
+                  <button type="button" data-toggle="modal" data-target="#exampleModaladd">Add new Address</button>
+                </li>
+                <a href="/orderList">
+                  <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                    <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
+                    <p class="mb-0">My Orders</p>
+                  </li>
+                </a>
+                
+              </ul>
+
+
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-lg-8">
+          <div class="card mb-4" id="displayAddress">
+
+
+
+
+
+
+          </div>
+
+
+
+          <div class="modal fade" id="exampleModaladd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content" style="margin-top: 200px;">
+                <div class="modal-header">
+                  <h5 id="exampleModalLabel">Add Address</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="alert alert-danger" role="alert" id="error" style="display: none;">
+                
+               
+                </div>
+                <div class="modal-body">
+                  <form id="addAddress">
+
+                    <!-- 2 column grid layout with text inputs for the first and last names -->
+                    <div class="row mb-4">
+                      <div class="col">
+                        <div class="form-outline">
+                          <label class="form-label" for="form3Example1">Full Name</label>
+                          <input type="text" id="fullName" class="form-control" name="fullName" required />
+
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-outline">
+                          <label class="form-label" for="form3Example2">Phone</label>
+                          <input type="tel" id="phone" class="form-control" name="phone" required />
+
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div class="form-outline mb-4">
+                      <label class="form-label" for="form3Example3">state</label>
+                      <input type="text" id="state" class="form-control" name="state" required />
+
+                    </div>
+
+                    <div class="row mb-4">
+                      <div class="col">
+                        <div class="form-outline">
+                          <label class="form-label" for="form3Example1">Area</label>
+                          <input type="text" id="form3Example1" class="form-control" name="area" required />
+
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-outline">
+                          <label class="form-label" for="form3Example2">Pincode</label>
+                          <input type="number" id="pinCode" class="form-control" name="pinCode" />
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-outline mb-4">
+                      <label class="form-label" for="form3Example3">Building Name</label>
+                      <input type="text" id="form3Example3" class="form-control" name="buildingName" />
+
+                    </div>
+
+                    <div>
+                      <button type="button" class="btn btn-secondary" id="close" data-dismiss="modal">Close</button>
+                      <button type="submitID" class="btn btn-primary">Submit</button>
+                    </div>
+
+                  </form>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    </div>
+
+
+   <!-- modal for profile edit -->
+   <!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Save changes">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row mb-4">
+          <div class="col">
+            <div class="form-outline">
+              <label class="form-label" for="form3Example1"> Name</label>
+              <input type="text" id="editedName" class="form-control" name="editedName"  value="<%=UserInfo.name%>" required   />
+
+            </div>
+          </div>
+         <% if (UserInfo.phone) { %>
+          <div class="col">
+            <div class="form-outline">
+              <label class="form-label" for="form3Example2">Phone</label>
+              <input type="tel" id="editedPhone" class="form-control" name="editedPhone" value="<%=UserInfo.phone%>" required />
+
+            </div>
+          </div>
+         <% } %>
+         
+        </div>
+
+
+        <div class="form-outline mb-4">
+          <label class="form-label" for="form3Example3">Email</label>
+          <input type="text" id="editedEmail" class="form-control" name="mail"  value="<%=UserInfo.email%>" required />
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="editProfile(`<%=UserInfo._id%>`)">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+  </section>
+
+
+
+
+
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>$('#exampleModal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget) // Button that triggered the modal
+      var recipient = button.data('whatever') // Extract info from data-* attributes
+      // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+      // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+      var modal = $(this)
+      modal.find('.modal-title').text('New message to ' + recipient)
+      modal.find('.modal-body input').val(recipient)
+    })</script>
+
+
+
+  <script>
+   
+// const errorMessage=document.getElementById("error")
+
+
+
+
+   
+
+     function editProfile(userID){
+      console.log(userID);
+      const name=document.getElementById("editedName").value
+      const email=document.getElementById("editedEmail").value
+      // const phone=document.getElementById("editedPhone").value
+      console.log(name,email);
+       console.log(111111111111111);
+      $.ajax({
+        url:`/editProfile`,
+        method:"post",
+        data:{name,email,userID},
+        success:((res)=>{
+          console.log(res);
+          if(res.update==true){
+            console.log(12121212121212);
+             const Toast = Swal.mixin({
+  toast: true,
+  position: 'middle-right',
+  iconColor: 'white',
+  customClass: {
+    popup: 'colored-toast'
+  },
+  showConfirmButton: false,
+  timer: 1500,
+  timerProgressBar: true
+})
+              Toast.fire({
+  icon: 'success',
+  title: 'Success'
+})
+      }
+        })
+      })
+     }
+
+     const  name=document.getElementById("fullName")	
+const phone=document.getElementById("phone")
+const state=document.getElementById("state" )
+const pin=document.getElementById("pinCode")
+const form=document.getElementById("addAddress")
+const errorMessage=document.getElementById("error")
+
+    $("#addAddress").submit((e) => {
+      console.log(name.value,121121212121212);
+      let message=[]
+
+if(name.value==""||name==null){
+        message.push("Name is required !!!!!!!!")
+        console.log(name.value+1212121122);
+}
+else if(phone.value==""||phone==null||phone.value.length<10){
+  message.push("Phone number is Not valid ! ! ! ! ! !")
+}
+else if(pin.value.length<5){
+  message.push("Pincode is not Valid ! ! ! ! !")
+}
+if(message.length>0){
+  console.log("Not valid ");
+  errorMessage.style.cssText="inline"
+  errorMessage.innerText=message.join("")
+  setTimeout(() => location.reload(), 100000)
+ 
+}else{
+  console.log("its valid ");
+      console.log(3233333);
+      e.preventDefault()
+      $.ajax({
+        url: "/addAddress",
+        method: "post",
+        data: $("#addAddress").serialize(),
+        success: ((res) => {
+          if (res.status) {
+            Swal.fire({
+  position: 'middle',
+  icon: 'success',
+  title: 'Address added',
+  showConfirmButton: false,
+  timer: 1500
+})
+            document.getElementById("close").click()
+            document.getElementById("manager").click()
+          }
+        })
+      })}
+    })
+    function editAddress(addressID) {
+
+      console.log(12121212121121212121212121);
+      console.log(addressID);
+
+      $("#editAddress"+addressID).submit((e) => {
+
+        e.preventDefault()
+        $.ajax({
+          url: `/editAddres?ID=${addressID}`,
+          method: "put",
+          data: $("#editAddress"+addressID).serialize(),
+          success: ((res) => {
+             location.reload()
+          })
+        })
+      })
+
+    }
+
+
+
+
+    function deleteAddress(AddressID) {
+      console.log(AddressID);
+      swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this imaginary file!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+        .then((willDelete) => {
+          $.ajax({
+            url: `/address?dlt=${AddressID}`,
+            method: "delete",
+
+            success: ((res) => {
+
+              if (res.status == true) {
+                console.log(111111);
+                document.getElementById(`delete${AddressID}`).remove()
+              }
+            })
+
+          })
+          if (willDelete) {
+            swal("Poof! Your imaginary file has been deleted!", {
+              icon: "success",
+            });
+          } else {
+            swal("Your imaginary file is safe!");
+          }
+        });
+
+
+    }
+
+    function addressMange() {
+      $.ajax({
+        url: `/addressManagement`,
+        method: "get",
+        success: ((res) => {
+
+          console.log(res.allAddress);
+          res.allAddress.address.forEach(element => {
+            document.getElementById("displayAddress").innerHTML += ` <div class="card-body" id="delete${element._id}"
+             style="border: outset;
+                                 ">
+                                    <div class="row">
+                                       <h3>Address</h3>
+        
+                                      </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">Name</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">${element.fullName}</p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">Phone</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">${element.phone}</p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">State</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">${element.state}</p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">Location</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">${element.area},${element.buildingName}</p>
+                                        </div>
+                                    </div>
+                       <!-- modaaaaal edit              -->
+                                    <div style="margin-top: 15px;">
+                                      
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal${element._id}"  >Edit</button>
+                                   
+            
+
+<div class="modal fade" id="exampleModal${element._id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="margin-top:200px;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="editAddress${element._id}" >
+                                   
+            <!-- 2 column grid layout with text inputs for the first and last names -->
+            <div class="row mb-4">
+              <div class="col">
+                <div class="form-outline">
+                    <label class="form-label" for="form3Example1">Full Name</label>
+                  <input type="text" id="fullName" value="${element.fullName}" class="form-control" name="fullName" value="" required/>
+                 
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-outline">
+                    <label class="form-label" for="form3Example2">Phone</label>
+                  <input type="tel" id="phone"   value="${element.phone}" class="form-control" name="phone" required/>
+                 
+                </div>
+              </div>
+            </div>
+          
+        
+            <div class="form-outline mb-4">
+                <label class="form-label" for="form3Example3">state</label>
+              <input type="text" id="state"  value="${element.state}" class="form-control" name="state" required />
+              
+            </div>
+          
+            <div class="row mb-4">
+                <div class="col">
+                  <div class="form-outline">
+                    <label class="form-label" for="form3Example1">Area</label>
+                    <input type="text" id="form3Example1"  value="${element.area}" class="form-control" name="area" required />
+                   
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-outline">
+                    <label class="form-label" for="form3Example2">Pincode</label>
+                    <input type="text" id="pinCode" class="form-control"  value="${element.pinCode}" name="pinCode" />
+                  
+                  </div>
+                </div>
+              </div>
+              <div class="form-outline mb-4">
+                <label class="form-label" for="form3Example3">Building Name</label>
+                <input type="text" id="form3Example3" class="form-control"  value="${element.buildingName}" name="buildingName" />
+                
+                <div >
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary" id="edit${element._id}" onclick="editAddress('${element._id}')" >Submit</button>
+              </div>  
+              </div>
+          
+              
+              </form>
+
+              
+              
+              
+              
+              
+              
+              
+              
+              </div>
+              <div class="modal-footer">
+                
+                </div>
+                </div>
+                </div>
+                </div>
+
+                <button type="button" class="btn btn-danger" onclick="deleteAddress('${element._id}')">Delete</button>
+                </div>
+        
+                                </div> `
+          });
+
+        })
+      })
+    }   
+  </script>
+  <%- include("partials/userFooter.ejs")-%>

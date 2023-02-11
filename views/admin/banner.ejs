@@ -1,0 +1,91 @@
+<%- include("partials/adminHeader.ejs") -%>
+    <div class="container mt-5">
+        <div class="row tm-content-row">
+            <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 tm-block-col">
+                <div class="tm-bg-primary-dark tm-block tm-block-products">
+                    <div class="tm-product-table-container">
+                        <table class="table table-hover tm-table-small tm-product-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">Description</th>
+                                   <th scope="col">url</th>
+                                   <th scope="col">Image</th>
+                                   
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                    <% if (banner.length>0) { %>
+                             <% for( let i = 0; i <banner.length; i++ ) { %>
+                               
+                                <tr id="banner">
+                                   
+                                    <td class="tm-product-name"><%=banner[i].title%></td>
+
+                                    <td> <img height="50px" width="60px" style="border-radius: 50%;" src=" <%=banner[i].image%>" alt=""></td>
+                                    <td><%=banner[i].description%></td>
+
+
+                                    <td><%=banner[i].url%></td>
+                                 
+                                    
+                                    
+                                    <td> <td><a href="/admin/editBanner/<%=banner[i]._id%>"><i class="far fa-edit tm-product-delete-icon " ></i></td></a></td>
+
+                                    <td>
+                                        <button href="/admin/banner" type="button" class="tm-product-delete-link" onclick="deleteBanner(`<%=banner[i]._id%>`)">
+                                            <i class="far fa-trash-alt tm-product-delete-icon"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                             <% } %>
+
+
+
+                    <% } %>
+                            
+                             
+                               
+                               
+                    
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- table container -->
+                    <div class="col-12">
+                         <a href="/admin/addBanner">
+                        <button type="submit" class="btn btn-primary btn-block text-uppercase">Add Banner</button>
+                    </a>
+                      </div>
+                   
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 tm-block-col">
+
+            </div>
+        </div>
+    </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <%- include("partials/adminFooter.ejs") -%>
+    <script>
+        function deleteBanner(ID){
+           console.log(ID);
+            $.ajax({
+                
+                url:`/admin/dltbanner?dltID=${ID}`,
+                method:"delete",
+               
+                success:((res)=>{
+                    if (res.status) {
+                        console.log(21212121212);
+                        document.getElementById("banner").remove()
+                    }
+                })
+            })
+        }
+
+
+    </script>

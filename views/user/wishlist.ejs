@@ -1,0 +1,81 @@
+
+<%- include("partials/userHeader.ejs")-%>
+<form class="bg0 p-t-75 p-b-85">
+<div class="container" style="display: flex;justify-content: center;">
+<table class="table-shopping-cart border" style="width: 70%;">
+    <tr class="table_head">
+        <th class="column-1">Product</th>
+        <th class="column-2">name</th>
+        <th class="column-3">Price</th>
+        
+    
+     
+       
+       
+    </tr>
+ <% if (allWishlist) { %>
+  
+ 
+
+    <% for( let i=0; i < allWishlist.items.length; i++ ) { %>
+        <tr class="table_row" >
+            <td class="column-1">
+                <div class="how-itemcart1">
+                    <img src="<%=allWishlist.items[i].image[0]%>" alt="IMG">
+                </div>
+            </td>
+            <td class="column-2">
+                <%= allWishlist.items[i].name%>
+            </td>
+           
+            <td class="column-4">
+                <%= allWishlist.items[i].price%>
+            </td>
+         
+            <td> <button type="button" class="btn btn-danger"
+                    style="margin-right: 23px;"
+                    onclick="deleteCart(``)"><i
+                        class="fa fa-trash" aria-hidden="true"></i></button></td> 
+              <td><button
+                class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"
+                onclick="addTocart('<%=allWishlist.items[i]._id%>')">
+                Add to cart
+            </button></td>          
+        </tr>
+
+
+
+
+        <% } %>
+        <% } %>
+
+
+
+
+</table>
+</div>
+</form>
+<script>
+
+function addTocart(prodctId) {
+			$.ajax({
+				url: `/addCart?Prdct=${prodctId}`,
+				method: "get",
+				success: ((res) => {
+					if (res.notlogged==true) {
+						console.log(res);
+						swal("Please Login..... ");
+					}
+					else if(res.stock==true) {
+						swal("Good job!", "Add to cart!", "success");
+					
+						
+					}
+					else if(res.notAvailable==true){
+						swal(" No stock..... ");
+					}
+				})
+			})}
+
+</script>
+<%- include("partials/userFooter.ejs")-%>

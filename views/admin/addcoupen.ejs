@@ -1,0 +1,160 @@
+<%- include("partials/adminHeader.ejs") -%> 
+
+
+
+<div class="container tm-mt-big tm-mb-big">
+  
+                
+    <div class="row">
+       
+      <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
+        <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+          <div class="row">
+            <div class="col-12">
+              <h2 class="tm-block-title d-inline-block">Add category</h2>
+            </div>
+          </div>
+          <div class="row tm-edit-product-row">
+            <div class="col-xl-6 col-lg-6 col-md-12">
+              <form   id="addCoupen" >
+                <div class="form-group mb-3">
+                  <label
+                    for="name"
+                    >Coupen Code
+                  </label>
+                  <input
+                    id="name"
+                    name="coupenCode"
+                    type="text"
+                    class="form-control validate"
+                    required
+                  />
+                </div>
+              
+                <div class="form-group mb-3">
+                    <label
+                      for="name"
+                      >Status
+                    </label>
+                    <input
+                      id="name"
+                      name="status"
+                      type="text"
+                      class="form-control validate"
+                      required
+                    />
+                  </div>
+
+                  <div class="form-group mb-3">
+                    <label
+                      for="name"
+                      >Coupen value
+                    </label>
+                    <input
+                      id="name"
+                      name="coupenValue"
+                      type="number"
+                      class="form-control validate"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="col-xl-6 col-lg-6 col-md-12">
+                  <div class="form-group mb-3">
+                    <label
+                      for="name"
+                      >Cart value
+                    </label>
+                    <input
+                      id="name"
+                      name="cartValue"
+                      type="number"
+                      class="form-control validate"
+                      required
+                    />
+                  </div>
+
+                  <div class="form-group mb-3">
+                    <label
+                      for="name"
+                      >Expire Date
+                    </label>
+                    <input
+                      id="name"
+                      name="expireDte"
+                      type="date"
+                      class="form-control validate"
+                      required
+                    />
+                  </div>
+
+                  <div class="form-group mb-3">
+                    <label
+                      for="name"
+                      >Available
+                    </label>
+                    <input
+                      id="name"
+                      name="available"
+                      type="number"
+                      class="form-control validate"
+                      required
+                    />
+                  </div>
+                
+               
+                    
+                
+            </div>
+           
+            <div class="col-12">
+              
+              <button type="submit" class="btn btn-primary btn-block text-uppercase">Add Coupen</button>
+            </div>
+          </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script
+  src="https://code.jquery.com/jquery-3.6.3.js"
+  integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+  crossorigin="anonymous"></script>
+
+
+
+ <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script> -->
+
+
+  <script>
+    $(document).ready(function() {
+    $("#addCoupen").submit((e)=>{
+        e.preventDefault()
+       
+        $.ajax({
+            
+            url:"/admin/addCoupen",
+            method:"post",
+            data:$("#addCoupen").serialize(),
+            success:((res)=>{
+                console.log(121212122211111121);
+                if( res.status){
+                 
+                    swal("Good job!", "You clicked the button!", "success")
+                   
+                    window.location.href="/admin/viewaddCoupen";
+                }
+                else{
+                  swal("Coupen Already Exist");
+                }
+            })
+        })
+    })})
+  </script>
+  
+  <%- include("partials/adminFooter.ejs") -%> 

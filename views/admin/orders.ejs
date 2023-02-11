@@ -1,0 +1,123 @@
+<%- include("partials/adminHeader.ejs") -%>
+<div class="col-12 tm-block-col">
+    <div class="tm-bg-primary-dark tm-block tm-block-taller tm-block-scroll">
+        <h2 class="tm-block-title">Orders List</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ORDER NO.</th>
+                    <th scope="col">STATUS</th>
+
+
+                    <th scope="col">DISTANCE</th>
+                    <th scope="col">paymentStatus</th>
+                    <th scope="col">EST DELIVERY DUE</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <% for( let i=0; i < orders.length; i++ ) { %>
+
+
+                    <tr>
+                        <th scope="row">
+                            <%=orders[i]._id%>
+                        </th>
+
+                        <td style="color: green; font-weight: 900;">
+                            <select onchange="orderStatus(`<%=i%>`,`<%=orders[i]._id%>`)"
+                                id="mySelect<%=i%>" class="form-select" aria-label="Default select example"
+                                style="
+                            background: #f5a623;
+                            height: 49px;
+                            /* font-size: 6px; */
+                            font-weight: 800;
+                            color: aliceblue;
+                        ">
+                                <% if (orders[i].orderstatus=="Delivered" ) { %>
+                                    <option style="background: #f52e23;" value=" <%=orders[i].orderstatus%>">
+                                        <%=orders[i].orderstatus%>
+                                    </option>
+                                    <% }else if (orders[i].orderstatus=="Cancelled" ) { %>
+                                        <option value=" <%=orders[i].orderstatus%>">
+                                            <%=orders[i].orderstatus%>
+                                        </option>
+                                        <% }else{ %>
+                                            <option value=" <%=orders[i].orderstatus%>">
+                                                <%=orders[i].orderstatus%>
+                                            </option>
+                                            <option style="background: #f52e23;"value="Cancelled">Cancelled</option>
+                                            <option value="Shipped">Shipped</option>
+                                            <option style="background: #07ed66;"value="Delivered">Delivered</option>
+                                            <option value="Returned">Returned</option>
+                                            <option value="Out For Delivery">Out For Delivery</option>
+                                            <% }%>
+
+
+                            </select>
+
+                        </td>
+
+
+                        <td><b>
+                                <%=orders[i].paymentMethod%>
+                            </b></td>
+                        <td>
+                            <%=orders[i].paymentStatus%>
+                        </td>
+
+                        <td>
+                            <%=orders[i].date.toLocaleString()%>
+                        </td>
+
+                        <td> <a href="/admin/orderDetail/<%=orders[i].id%>"><button type="button"
+                                    class="btn btn-primary">view</button></a></td>
+
+                    </tr>
+                    <% } %>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script
+  src="https://code.jquery.com/jquery-3.6.3.js"
+  integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+  crossorigin="anonymous"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<%- include("partials/adminFooter.ejs") -%>
+<script>
+     function orderStatus(count, orderID) {
+            const status = document.getElementById("mySelect" + count).value;
+            console.log(status);
+            console.log(1212222222222222221);
+
+            $.ajax({
+                url: `/admin/changeOrderStatus?id=${orderID}&status=${status}`,
+                method: "post",
+                success: ((res) => {
+                    console.log(12121212121212121212);
+                    if (res.Status == true) {
+                        Swal.fire({
+  position: 'middle',
+  icon: 'success',
+  title: 'Order Status Changed',
+  showConfirmButton: false,
+  timer: 1500
+})
+
+
+                        setTimeout(() => location.reload(), 1000)
+                    }
+                })
+
+
+
+
+
+
+            }
+
+            )
+        }
+</script>

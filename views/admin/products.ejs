@@ -1,0 +1,114 @@
+<%- include("partials/adminHeader.ejs") -%> 
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.min.css'></link>
+<div class="container mt-5">
+    <div class="row tm-content-row">
+      <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8 tm-block-col">
+        <div class="tm-bg-primary-dark tm-block tm-block-products">
+          <div class="tm-product-table-container">
+            <table class="table table-hover tm-table-small tm-product-table">
+              <thead>
+               
+               
+               
+                <tr>
+                  <th scope="col">PRODUCT NAME</th>
+                  <th scope="col">PRICE</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">IMAGE</th>
+                  <th scope="col">EDIT</th>
+                  
+                  <th scope="col">DELETE</th>
+               
+                 
+                  
+                </tr>
+              </thead>
+              <tbody>
+              <% if (message.length>0) { %>
+                <div class="alert alert-danger" role="alert">
+                  <%=message%>
+                </div>                
+                 
+              <% } %>
+
+                <% for( let i = 0; i <productList.length; i++ ) { %>
+                <tr>
+                  <!-- <th scope="row"><input type="checkbox" /></th> -->
+                  <td class="tm-product-name"><%-productList[i].name %> </td>
+                  <td><%-productList[i].price %></td>
+                  <td><%-productList[i].quantity %></td>
+                  <td>  <img height="50px" width="60px" style="border-radius: 50%;" src=" <%-productList[i].image[0] %>" alt=""></td>
+                  <td><a href="/admin/editProduct/<%-productList[i]._id %>"><i class="far fa-edit tm-product-delete-icon " ></i></td></a>
+                  <td>
+                    <a href="/admin/deleteProduct/<%-productList[i]._id %>" class="tm-product-delete-link" id="dlt-btn" me>
+                      <i class="far fa-trash-alt tm-product-delete-icon"></i>
+                    </a> 
+                  </td>
+                 
+                </tr>
+                <% } %>
+                
+               
+              </tbody>
+            </table>
+          </div>
+          <!-- table container -->
+          <a
+            href="\admin\addproduct"
+            class="btn btn-primary btn-block text-uppercase mb-3">Add new product</a>
+          <button class="btn btn-primary btn-block text-uppercase">
+            Delete selected products
+          </button>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4 tm-block-col">
+        <div class="tm-bg-primary-dark tm-block tm-block-product-categories">
+          <h2 class="tm-block-title">Product Categories</h2>
+          <div class="tm-product-table-container">
+            <table class="table tm-table-small tm-product-table">
+              <tbody>
+                <tr>
+                 <% for( let i = 0;i <categoryList.length; i++ ) { %>
+                 <td class="tm-product-name"><%-categoryList[i].name %> </td>
+                  <td class="text-center">
+                    <a href="/admin/deleteCategory/<%-categoryList[i].id -%> " class="tm-product-delete-link"  >
+                      <i class="far fa-trash-alt tm-product-delete-icon"></i>
+                    </a>
+                  </td>
+                </tr>
+
+
+                 <% } %>
+                  
+              
+                
+              </tbody>
+            </table>
+          </div>
+          <!-- table container -->
+          <a
+          href="\admin\addcategory"
+          class="btn btn-primary btn-block text-uppercase mb-3">Add new category</a>
+         
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
+  <script>
+  
+  //  let btn=document.getElementById("dlt-btn");
+  //  btn.addEventListener('click',   function confirmDelete() {
+  //   swal("Are you sure you want to do this?", {  
+  // buttons: ["oh no!", "oh yes!"],  
+    
+  //  })
+  
+
+
+  // 
+  
+    
+  </script>
+  <%- include('partials/adminFooter.ejs') -%>

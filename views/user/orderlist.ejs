@@ -1,0 +1,95 @@
+<%- include("partials/userHeader.ejs")-%>
+<form class="bg0 p-t-75 p-b-85">
+<div class="container">
+<table class="table table-hover tm-table-small tm-product-table">
+  <thead>
+   
+   
+   
+    <tr>
+      <th scope="col">Order ID</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">PRICE</th>
+      <th>Date</th>
+      <th scope="col">ORDER STATUS</th>
+      
+      <!-- <th scope="col">Action</th> -->
+     
+     
+      
+    </tr>
+  </thead>
+  <tbody>
+  <% if (orderList) { %>
+   
+ 
+   
+   <% for( let j= 0; j<  orderList.length; j++ ) { %>
+   
+   
+    <% for( let i = 0; i < orderList[j].products.length; i++ ) { %>
+      <tr>
+        <td class="tm-product-name" style="font-weight: bold;">  <%=orderList[j].id %>  </td>
+        <!-- <th scope="row"><input type="checkbox" /></th> -->
+        <td style="font-weight: bold;"><%=orderList[j].products[i].quantity%></td>
+        <td style="font-weight: bold;"><%=orderList[j].products[i].Price%>  %> </td>
+       
+        <td><%=orderList[j].date.toLocaleDateString()%></td>
+        <td><p> <h7 style="font-weight: bold; color: green;"><%=orderList[j].orderstatus%></h7>
+             </td></p>
+
+        <!-- <td>
+          <a  class="tm-product-delete-link" id="dlt-btn" me>
+            <i class="far fa-trash-alt tm-product-delete-icon"></i>
+          </a> 
+        </td> -->
+        <td><a href="/ordersView?orderID=<%=orderList[j].id %>" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer"  style="width: 150px;height: 38px; ;">View</a></td>
+      <% if (orderList[j].orderstatus!="Delivered"&&orderList[j].orderstatus!="Cancelled") { %>
+       
+        <td><button id="cancel<%=orderList[j].id %>"  onclick="cancelOrder(`<%=orderList[j].id %>`)"   type="button" class="btn btn-danger">Cancel</button></td>
+     
+    <% } else if (orderList[j].orderstatus=="Cancelled") { %>
+     
+      <td><button id="cancelled"   type="button" class="btn btn-danger">Cancelled</button></td>
+      <% } %>
+      </tr>
+    <% } %>
+    <% } %>
+
+    <% } %>
+   
+
+    
+   
+  </tbody>
+</table>
+</div>
+</form>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+function cancelOrder(orderID){
+  console.log(11111111111111);
+
+  console.log(orderID);
+  $.ajax({
+    url:"/cancelOrder",
+    method:"post",
+    data:{ID:orderID},
+    success:((res)=>{
+      if(res.status){
+        document.getElementById("cancel"+orderID).innerHTML="Cancelled"
+        Swal.fire({
+  position: 'middile',
+  icon: 'success',
+  title: 'Your order has been Cancelled',
+  showConfirmButton: false,
+  timer: 1500
+})
+      }
+    })
+  })
+}
+
+</script>
+
+<%- include("partials/userFooter.ejs")-%>

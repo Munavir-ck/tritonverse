@@ -1,0 +1,64 @@
+<%- include("partials/adminHeader.ejs") -%>
+    <div class="col-12 tm-block-col">
+        <div class="tm-bg-primary-dark tm-block tm-block-taller tm-block-scroll">
+            <h2 class="tm-block-title">Orders List</h2>
+            <div id="invoice">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">DAY</th>
+                        <th scope="col">Total Order</th>
+                        <th scope="col">Total Product</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Profit</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+
+
+               <% for( let i = 0; i < monthlyReports.length; i++ ) { %>
+                <tr>
+                    <th scope="row">
+                     <%=month[i]%> /<%=monthlyReports[i]._id.year%> 
+                    </th>
+
+                    <td>
+                     <%=monthlyReports[i].count %> 
+                        
+                    </td>
+  
+            
+                    <td><b>
+                        <%=monthlyReports[i].products %> 
+                        </b></td>
+                    <td>
+                        <%=monthlyReports[i].totalprice %> 
+                    </td>
+
+                    <td>
+                        <%=monthlyReports[i].totalprice*(15/100) %> 
+                    </td>
+
+
+
+                </tr>
+               <% } %>
+
+                   
+
+                </tbody>
+            </table>
+        </div>
+        <button type="submit" onclick="generatePdf()">Download</button>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script>
+      function generatePdf(){
+        const element=document.getElementById("invoice");
+        html2pdf().from(element).save()
+      }
+    </script>
+    
+    <%- include("partials/adminFooter.ejs") -%>
