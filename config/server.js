@@ -1,7 +1,8 @@
 const mongoose = require('mongoose')
+const mon=process.env.mongo
 
 module.exports.dbConnection=function (cb){
-    mongoose.connect('mongodb://0.0.0.0:27017/shopping', {
+    mongoose.connect(mon, {
         useNewUrlParser: true,
         useUnifiedTopology: true
     }).then(()=>{
