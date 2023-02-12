@@ -1,41 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<title>Tritonverse</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-<!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="/user/userHome/images/icons/favicon.png"/>
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="/user/userHome/images/icons/favicon.png" />
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/user/userHome/vendor/bootstrap/css/bootstrap.min.css">
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/user/userHome/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/user/userHome/fonts/iconic/css/material-design-iconic-font.min.css">
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/user/userHome/fonts/linearicons-v1.0.0/icon-font.min.css">
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/user/userHome/vendor/animate/animate.css">
-<!--===============================================================================================-->	
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/user/userHome/vendor/css-hamburgers/hamburgers.min.css">
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/user/userHome/vendor/animsition/css/animsition.min.css">
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/user/userHome/vendor/select2/select2.min.css">
-<!--===============================================================================================-->	
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/user/userHome/vendor/daterangepicker/daterangepicker.css">
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/user/userHome/vendor/slick/slick.css">
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/user/userHome/vendor/MagnificPopup/magnific-popup.css">
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/user/userHome/vendor/perfect-scrollbar/perfect-scrollbar.css">
-<!--===============================================================================================-->
+	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="/user/userHome/css/util.css">
 	<link rel="stylesheet" type="text/css" href="/user/userHome/css/main.css">
-	
-<!--===============================================================================================-->
+
+	<!--===============================================================================================-->
 </head>
+
 <body>
 	<header>
 		<!-- Header desktop -->
@@ -49,31 +51,31 @@
 
 					<div class="right-top-bar flex-w h-full">
 						<% if (!locals.session.loggedin) { %>
-						
+
 							<a href="/login" class="flex-c-m trans-04 p-lr-25">
 								Login
 							</a>
-						
-						<% } else { %>
-						 
-							<a href="/logout" class="flex-c-m trans-04 p-lr-25">
-								Logout
-							</a>
-					 
-							
-						<a href="/profile" class="flex-c-m trans-04 p-lr-25">
-											<%=name%>
-											</a>
-						  
-						<% } %> 
+
+							<% } else { %>
+
+								<a href="/logout" class="flex-c-m trans-04 p-lr-25">
+									Logout
+								</a>
+
+
+								<a href="/profile" class="flex-c-m trans-04 p-lr-25">
+									<%=name%>
+								</a>
+
+								<% } %>
 					</div>
 				</div>
 			</div>
 
 			<div class="wrap-menu-desktop">
 				<nav class="limiter-menu-desktop container">
-					
-					<!-- Logo desktop -->		
+
+					<!-- Logo desktop -->
 					<a href="#" class="logo">
 						<img src="/images/triton.png-removebg-preview.png" alt="IMG-LOGO">
 					</a>
@@ -83,51 +85,54 @@
 						<ul class="main-menu">
 							<li class="active-menu">
 								<a href="/">Home</a>
-								
+
 							</li>
 
 							<li>
 								<a href="/displayProduct">Shop</a>
 							</li>
 
-				
+
 
 							<li>
 								<a href="blog">Blog</a>
 							</li>
 
-							
+
 							<li>
 								<a href="/contact">Contact</a>
 							</li>
 						</ul>
-					</div>	
+					</div>
 
 					<!-- Icon header -->
 					<div class="wrap-icon-header flex-w flex-r-m">
 						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
-							
+
 							<i class="zmdi zmdi-search"></i>
-						   
+
 						</div>
 
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"  data-notify="<%=count %>">
-							<a href="/displayCart"></a>
+						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
+							data-notify="<%=count %>">
+							<a href="/displayCart">
 							<i class="zmdi zmdi-shopping-cart"></i>
-						</a>
+							</a>
 						</div>
 
-						<a href="/addWishlist"  class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="<%=wishlistCount  %> ">
+						<a href="/addWishlist"
+							class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti"
+							data-notify="<%=wishlistCount  %> ">
 							<i class="zmdi zmdi-favorite-outline"></i>
 						</a>
 					</div>
 				</nav>
-			</div>	
+			</div>
 		</div>
 
 		<!-- Header Mobile -->
 		<div class="wrap-header-mobile">
-			<!-- Logo moblie -->		
+			<!-- Logo moblie -->
 			<div class="logo-mobile">
 				<a href="/"><img src="/images/triton.png-removebg-preview.png" alt="IMG-LOGO"></a>
 			</div>
@@ -138,13 +143,16 @@
 					<i class="zmdi zmdi-search"></i>
 				</div>
 
-				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"  data-notify="<%=count %>">
+				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
+					data-notify="<%=count %>">
 					<a href="/displayCart">
-					<i class="zmdi zmdi-shopping-cart"></i>
-				</a>
+						<i class="zmdi zmdi-shopping-cart"></i>
+					</a>
 				</div>
 
-				<a href="/addWishlist" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti" data-notify="<%=wishlistCount  %> ">
+				<a href="/addWishlist"
+					class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti"
+					data-notify="<%=wishlistCount  %> ">
 					<i class="zmdi zmdi-favorite-outline"></i>
 				</a>
 			</div>
@@ -170,23 +178,23 @@
 				<li>
 					<div class="right-top-bar flex-w h-full">
 						<% if (!locals.session.loggedin) { %>
-						
+
 							<a href="/login" class="flex-c-m trans-04 p-lr-25">
 								Login
 							</a>
-						
-						<% } else { %>
-						 
-							<a href="/logout" class="flex-c-m trans-04 p-lr-25">
-								Logout
-							</a>
-					 
-							
-						<a href="/profile" class="flex-c-m trans-04 p-lr-25">
-											<%=name%>
-											</a>
-						  
-						<% } %> 
+
+							<% } else { %>
+
+								<a href="/logout" class="flex-c-m trans-04 p-lr-25">
+									Logout
+								</a>
+
+
+								<a href="/profile" class="flex-c-m trans-04 p-lr-25">
+									<%=name%>
+								</a>
+
+								<% } %>
 					</div>
 				</li>
 			</ul>
@@ -194,7 +202,7 @@
 			<ul class="main-menu-m">
 				<li>
 					<a href="/">Home</a>
-					
+
 					<span class="arrow-main-menu-m">
 						<i class="fa fa-angle-right" aria-hidden="true"></i>
 					</span>
@@ -204,13 +212,13 @@
 					<a href="/displayProduct">Shop</a>
 				</li>
 
-				
+
 
 				<li>
 					<a href="/blog">Blog</a>
 				</li>
 
-			
+
 
 				<li>
 					<a href="/contact">Contact</a>
@@ -234,5 +242,3 @@
 			</div>
 		</div>
 	</header>
-
-

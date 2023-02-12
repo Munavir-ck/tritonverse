@@ -365,15 +365,17 @@ const MobileVerify = (req, res) => {
 const OTP = (req, res) => {
   req.session.phone = req.body.mobileNo;
   console.log(req.session.phone);
+  const phone=req.session.phone
   sendotp(req.session.phone);
 
-  res.render("user/otp",{message:false})
+  res.render("user/otp",{message:null,phone})
 };
 const PostOtp = (req, res,next) => {
 
   try {
     const userOtp = req.body.name;
     console.log(req.session.phone);
+    const phone=req.session.phone
     const UserOtp = userOtp.join("");
     console.log(UserOtp);
     const verified = verifyotp(req.session.phone, UserOtp).then(
@@ -381,8 +383,8 @@ const PostOtp = (req, res,next) => {
         if (verification_check.status == "approved") {
           res.redirect("/signup");
         } else if (verification_check.status == "pending") {
-          req.flash("message", "invalid otp");
-          res.render("user/otp",{message:"Incorrect OTP"});
+        
+          res.render("user/otp",{message:"Incorrect OTP",phone});
         }
       }
     );
@@ -722,7 +724,7 @@ const verifyPayment = async (req, res,next) => {
   console.log("payment Verification");
   console.log(req.session.order);
            try {
-            
+            const userID = req.session.login._id;
             const orderUpdate = await OrderDB.findOneAndUpdate(
               { _id: req.session.order },
               { $set: { paymentStatus: "Success", orderstatus: "Confirm" } }
@@ -734,7 +736,7 @@ const verifyPayment = async (req, res,next) => {
                 { $inc: { quantity: -element.quantity } }
               );
             });
-          
+            let removecart = await cartDb.findOneAndRemove({ owner: userID });
             console.log(orderUpdate);
             res.json({
               order: true,
@@ -905,7 +907,7 @@ const orderInvoice = async (req, res,next) => {
       let index = selectAddress.address.findIndex((x) => x.id == order.address);
       console.log(index);
       const deliveryAddress = selectAddress.address[index];
-      res.render("user/orderinvoice", { order, deliveryAddres,name });
+      res.render("user/orderinvoice", { order, deliveryAddress,name });
     }
   } catch (error) {
     console.log(error);
@@ -916,7 +918,7 @@ const orderInvoice = async (req, res,next) => {
 const successPage = (req, res,next) => {
   let name=res.locals.Username
   console.log(req.session.login._id);
-  res.render("user/success",name);
+  res.render("user/success",{name});
 };
 const addWishlist = async (req, res,next) => {
   const productID = req.query.prdctID;

@@ -282,7 +282,7 @@ const coupen = async (req, res,next) => {
 const viewaddCoupen = async (req, res,next) => {
   res.render("admin/addcoupen");
 };
-const addCoupen = async (req, res) => {
+const addCoupen = async (req,res,next) => {
   try {
     const coupenName=req.body.coupenCode
     const name=new RegExp(`^${coupenName}`,"i")
@@ -294,7 +294,7 @@ const addCoupen = async (req, res) => {
     }else{
   
       const addCoupen = await coupenDB.create(req.body);
-    
+    console.log(111111111111);
       res.json({ status: true });
     }
   } catch (error) {

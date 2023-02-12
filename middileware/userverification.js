@@ -9,7 +9,7 @@ const userverification=(req,res,next)=>{
     }
 }
 
-const adminVerify=(req,res)=>{
+const adminVerify=(req,res,next)=>{
     if(req.session.isAuth){
         next()
        }

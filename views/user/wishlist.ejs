@@ -55,8 +55,8 @@
 </table>
 </div>
 </form>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-
 function addTocart(prodctId) {
 			$.ajax({
 				url: `/addCart?Prdct=${prodctId}`,
@@ -67,7 +67,13 @@ function addTocart(prodctId) {
 						swal("Please Login..... ");
 					}
 					else if(res.stock==true) {
-						swal("Good job!", "Add to cart!", "success");
+                        Swal.fire({
+  position: 'middle',
+  icon: 'success',
+  title: 'Added To Cart',
+  showConfirmButton: false,
+  timer: 1500
+})
 					
 						
 					}
