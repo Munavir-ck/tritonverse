@@ -1,7 +1,7 @@
 const express=require('express')
 const router=express.Router()
 const{storeImage}=require('../middileware/multer')
-const{AdminIsAuth}=require('../middileware/Authentication')
+const{AdminIsAuth}=require('../middileware/authentication')
 const{productPhotos}=require('../middileware/multer2')
 
 const{
