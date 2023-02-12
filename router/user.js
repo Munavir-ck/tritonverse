@@ -41,7 +41,8 @@ const{
     editProfile,
     
     search,
-    
+    blog,
+    contact,
   
    
    
@@ -62,27 +63,29 @@ router.post("/OTP", OTP)
 router.post("/otpVerify",PostOtp)
 router.get("/MobileVerify",MobileVerify)
 router.get("/profile",isAuth,profile)
-router.patch("/cartQuantity",cartQuantity)
-router.post("/addAddress",addAddress)
-router.delete("/address",deleteAddress)
+router.patch("/cartQuantity",userverification,cartQuantity)
+router.post("/addAddress",userverification,addAddress)
+router.delete("/address",userverification,deleteAddress)
 router.post("/checkOutaddress",isAuth,addressCheckout)
-router.post("/placeOrder",placerOrder)
-router.get("/orderList",orderList)
+router.post("/placeOrder",userverification,placerOrder)
+router.get("/orderList",isAuth,orderList)
 router.get("/logout",logout)
-router.delete("/deleteCart",deleteCart)
-router.get("/addressManagement",addressManagement)
-router.put("/editAddres",editAddres)
-router.post("/couponChecking",couponChecking)
-router.get("/orderinvoice",orderInvoice)
-router.get("/successPage",successPage)
-router.post("/addWishlist",isAuth,addWishlist)
+router.delete("/deleteCart",userverification,deleteCart)
+router.get("/addressManagement",userverification,addressManagement)
+router.put("/editAddres",userverification,editAddres)
+router.post("/couponChecking",userverification,couponChecking)
+router.get("/orderinvoice",isAuth,orderInvoice)
+router.get("/successPage",isAuth,successPage)
+router.post("/addWishlist",userverification,addWishlist)
 router.get("/addWishlist",isAuth, wishListView)
-router.post("/create-order",onlinePayment)
-router.get("/verifyPayment",verifyPayment)
-router.get("/ordersView",orderView)
-router.post("/cancelOrder",cancelOrder)
-router.post("/editProfile",editProfile)
+router.post("/create-order",userverification,onlinePayment)
+router.get("/verifyPayment",userverification,verifyPayment)
+router.get("/ordersView",userverification,orderView)
+router.post("/cancelOrder",isAuth,cancelOrder)
+router.post("/editProfile",userverification,editProfile)
 router.post("/search",search)
+router.get("/blog",blog)
+router.get("/contact",contact)
 
 
 

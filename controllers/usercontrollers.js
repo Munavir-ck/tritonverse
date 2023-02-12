@@ -367,10 +367,7 @@ const OTP = (req, res) => {
   console.log(req.session.phone);
   sendotp(req.session.phone);
 
-  res.render("user/otp", {
-    message: req.flash("message"),
-    phone: req.session.phone,
-  });
+  res.render("user/otp",{message:false})
 };
 const PostOtp = (req, res,next) => {
 
@@ -385,7 +382,7 @@ const PostOtp = (req, res,next) => {
           res.redirect("/signup");
         } else if (verification_check.status == "pending") {
           req.flash("message", "invalid otp");
-          res.redirect("/otpVerify");
+          res.render("user/otp",{message:"Incorrect OTP"});
         }
       }
     );
@@ -1071,6 +1068,18 @@ const editProfile=async(req,res,next)=>{
 
 
  }
+ const blog=(req,res)=>{
+  let count = res.locals.count;
+  let name=res.locals.Username
+  let wishlistCount = res.locals.wishlistCount;
+  res.render("user/blog",{count,name,wishlistCount})
+ }
+ const contact=(req,res)=>{
+  let count = res.locals.count;
+  let name=res.locals.Username
+  let wishlistCount = res.locals.wishlistCount;
+  res.render("user/contact",{count,name,wishlistCount})
+ }
 
 
 module.exports = {
@@ -1111,5 +1120,7 @@ module.exports = {
   cancelOrder,
   editProfile,
   search,
+  contact,
+  blog,
  
 };

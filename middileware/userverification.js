@@ -9,5 +9,14 @@ const userverification=(req,res,next)=>{
     }
 }
 
+const adminVerify=(req,res)=>{
+    if(req.session.isAuth){
+        next()
+       }
+       else{
+       res.json({notlogged:true})
+       }
+}
 
-module.exports= {userverification};
+
+module.exports= {userverification,adminVerify};
