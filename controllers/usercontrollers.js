@@ -43,11 +43,11 @@ const userHome = async (req, res,next) => {
     let wishlistCount = res.locals.wishlistCount;
     console.log(wishlistCount, "ennnnnxnnxnxnxnxnxnx");
   
-    const categoryList = await Category.find({});
+    const categoryList = await Category.find();
     const banner=await bannerDb.find({})
     console.log(banner);
-  
-   
+    console.log(categoryList); 
+    console.log(categoryList.lenght);
     const ALL = req.query.allCat;
     const ID = req.query.catID;
   

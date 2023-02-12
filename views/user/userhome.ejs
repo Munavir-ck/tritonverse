@@ -143,7 +143,7 @@
 	<div class="sec-banner bg0 p-t-95 p-b-55">
 		<div class="container">
 			<div class="row">
-				<% if (categoryList.lenght<0) { %>
+				<% if (categoryList.length>0) { %>
 				 
 				
 				<% for( let i = 0; i < 2; i++ ) { %>
@@ -176,7 +176,7 @@
 				<% } %>
 				<% } %>
 				
-				<% if (categoryList.lenght<0) { %>
+				<% if (categoryList.lenght>0) { %>
 				<% for( let i= 2; i< categoryList.length; i++ ) { %>
 				<div class="col-md-6 col-lg-4 p-b-30 m-lr-auto">
 					<!-- Block1 -->
@@ -270,7 +270,7 @@
 			</div>
 
 			<div class="row isotope-grid">
-				<% if ( shop.length.lenght>0) { %>
+				<% if ( shop.length>0) { %>
 				 
 				
 				<% for( let i = 0; i < shop.length; i++ ) { %>
