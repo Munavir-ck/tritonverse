@@ -74,6 +74,7 @@ const userPostLogin = async (req, res,next) => {
    
     const { email, password } = req.body;
     const user = await User.findOne({ email: email });
+    console.log(user);
 
     if (user) {
       console.log(user.email);
@@ -591,10 +592,12 @@ const addressCheckout = async (req, res,next) => {
   }
 };
 const deleteAddress = async (req, res,next) => {
+  console.log(11111111111);
   const dltID = req.query.dlt;
   const userID = req.session.login._id;
-  await addressDb.updateOne(
-    { id: userID },
+  console.log(dltID);
+  const dltAddress=await addressDb.updateOne(
+    { user: userID },
     { $pull: { address: { _id: dltID } } }
   );
   res.json({ status: true });
