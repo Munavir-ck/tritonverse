@@ -249,7 +249,7 @@
    
 
      function editProfile(userID){
-      console.log(userID);
+    
       const name=document.getElementById("editedName").value
       const email=document.getElementById("editedEmail").value
       // const phone=document.getElementById("editedPhone").value
@@ -257,7 +257,7 @@
        console.log(111111111111111);
       $.ajax({
         url:`/editProfile`,
-        method:"post",
+        method:"patch",
         data:{name,email,userID},
         success:((res)=>{
           console.log(res);

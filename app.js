@@ -10,7 +10,6 @@ const session=require("express-session")
  const cartDb=require('./models/user/cart')
  const wishListDB=require('./models/wishlist')
  const userDB=require("./models/user/user")
-//  const {swal}=require("sweetalert")
 
 
 

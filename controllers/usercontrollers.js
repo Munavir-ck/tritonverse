@@ -32,12 +32,12 @@ const signup = (req, res,next) => {
   res.render("user/usersignup", { message: false });
 };
 const userLogin = (req, res) => {
-  res.render("user/userlogin");
+  res.render("user/userlogin",{message:req.flash("message")});
 };
 const userHome = async (req, res,next) => {
   try {
     
-    console.log("home isrunning");
+    
     let count = res.locals.count;
     let name=res.locals.Username
     let wishlistCount = res.locals.wishlistCount;
@@ -89,12 +89,12 @@ const userPostLogin = async (req, res,next) => {
           console.log("login success");
           res.redirect("/");
         } else {
-          console.log("wrong password");
+          req.flash("message","Wrong Password")
           res.render("user/userlogin");
         }
       });
     } else {
-      console.log("wrong email");
+      req.flash("message","Wrong Mail")
       res.render("user/userlogin");
     }
   } catch (error) {
