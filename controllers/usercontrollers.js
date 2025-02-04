@@ -108,6 +108,9 @@ const postSignup = async (req, res,next) => {
   try {
     const user = await User.find({ email: req.body.useremail });
 
+    console.log(222222);
+    
+
     if (user == true) {
       console.log("user");
       res.redirect("/signup");
@@ -615,12 +618,11 @@ const placerOrder = async (req, res,next) => {
     if(!discount){
       discount=0;
     }
-    console.log(Cart);
-    console.log(11111111111111111111111);
+   
 
     const selectAddress = await addressDb.findOne({ user: userID });
     //
-    console.log(selectAddress, 123345567);
+ 
     let index = selectAddress.address.findIndex((x) => x._id == address_id);
 
     console.log(index);
@@ -652,12 +654,12 @@ const placerOrder = async (req, res,next) => {
 
           console.log("remoced successfullyy");
           let removecart = await cartDb.findOneAndRemove({ owner: userID });
-          console.log(11111111111111111111);
+          
         });
 
       res.json({ status: true });
     } else if ("paypal" == req.query.Paypal) {
-      console.log(2121212121212121212121212121212);
+      
       const createOrder = await orderDb
         .create({
           date: new Date(),
